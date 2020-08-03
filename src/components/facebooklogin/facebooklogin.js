@@ -6,7 +6,6 @@ import ReacDOM from 'react-dom';
 import MessengerMessageUs from 'react-messenger-message-us';
 import ShareDialog from 'react-native-fbsdk';
 import ShareFacebook from '../share-facebook/ShareFacebook';
-
 export default class MyComponent extends Component {
   state = {
     isLoggedIn: false,
@@ -69,8 +68,7 @@ export default class MyComponent extends Component {
           <h2>Welcome {this.state.name}</h2>
             <html>
             <WhatsApp/>
-            <ShareFacebook/>
-           
+            <ShareFacebook/>           
             </html>
           
         </div>
