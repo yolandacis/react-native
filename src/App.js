@@ -9,18 +9,13 @@ import MovieForm from './components/MovieForm';
 import FacebookLogin from './components/facebooklogin/facebooklogin';
 import { View, StyleSheet, Text, Linking, TextInput, Button } from 'react-native';
 
-/*const config = {
-	issuer: 'https://dev-354685.oktapreview.com/oauth2/default',
-    redirect_uri: window.location.origin + '/implicit/callback',
-    client_id: '0oafx0btortHF8EEJ0h7'
-}*/
-
 class App extends Component {
   render() {
     return (
  	<div>
  		<MovieForm/>
  		<Movies/>
+ 		
  	</div>
     );
   }

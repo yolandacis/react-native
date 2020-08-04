@@ -1,6 +1,11 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { API_BASE_URL } from '../config';
+import IncreaseCountButton from './IncreaseCountButton';
+import MovieDelete from './MovieDelete';
+import { confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 export default class App extends React.Component {
@@ -12,7 +17,7 @@ export default class App extends React.Component {
             error: null
         }
     }
-    baseURL = 'http://localhost:8000/movies';
+    baseURL = API_BASE_URL+'/movies';
     
     getData = (ev)=>{
         this.setState({loaded:false, error: null});
@@ -34,13 +39,43 @@ export default class App extends React.Component {
     badStuff = (err) => {
         this.setState({loaded: true, error: err.message});
     }
+    onDelete(id) {
+
+        console.log('clik' + id);
+        this.setState({loaded:false, error: null});
+        let url = this.baseURL + '/'+ id;
+        
+        let req = new Request(url, {
+            method: 'DELETE'
+        });
+        
+        fetch(req)
+        .then(this.showData)
+        .then(this.getData)
+        console.log('se elimino');
+
+    }
+    onIncrease(id) {
+        console.log ('clic en aumentar contador'+ id);
+        this.setState({loaded:false, error: null});
+        let url = this.baseURL + '/'+ id + '/count';
+        
+        let req = new Request(url, {
+            method: 'POST'
+        });
+        
+        fetch(req)
+        .then(this.showData)
+        .then(this.getData)
+        console.log('se ACTUALIZÓ');
+    }
     render() {
         return (
             <ScrollView >
                 { !this.state.loaded && (
                     <Text>LOADING</Text>
                 )}
-                <Text style={styles.txt}>Películas encontradas!</Text>
+                <Text style={styles.txt}> PELICULAS!</Text>
                 <Button title="lISTADO DE PELICULAS"
                     onPress={this.getData} />
                 { this.state.error && (
@@ -49,8 +84,21 @@ export default class App extends React.Component {
                 { this.state.data && this.state.data.length > 0 && (
                     this.state.data.map( comment => (
                         <Text key={comment.id} style={styles.txt}>
-                           { comment.title }  
-                        </Text>
+                            <table>
+                            <tr>
+                            <td>
+                           { comment.title }
+                           </td>
+                           <td>
+                           { comment.count }
+                           </td>
+                           <td>
+                           <button onClick={() => this.onDelete(comment.id)}> Eliminar</button>
+                           </td>
+                           <button onClick={()=> this.onIncrease(comment.id)}>Like</button>
+                           </tr>
+                           </table>
+                           </Text>
                     ))
                 )}
             </ScrollView>
