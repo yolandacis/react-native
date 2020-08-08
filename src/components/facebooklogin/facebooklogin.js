@@ -6,6 +6,7 @@ import ReacDOM from 'react-dom';
 import MessengerMessageUs from 'react-messenger-message-us';
 import ShareDialog from 'react-native-fbsdk';
 import ShareFacebook from '../share-facebook/ShareFacebook';
+import Navbar from '../Navbar';
 export default class MyComponent extends Component {
   state = {
     isLoggedIn: false,
@@ -60,17 +61,16 @@ export default class MyComponent extends Component {
           style={{
             width: "400px",
             margin: "auto",
-            background: "#f4f4f4",
-            padding: "20px"
+            padding: "20px",
+            backgroundPosition: "center",
           }}
         >
           <img src={this.state.picture} alt={this.state.name} />
           <h2>Welcome {this.state.name}</h2>
-            <html>
-            <WhatsApp/>
-            <ShareFacebook/>           
-            </html>
-          
+          <div>
+            <Navbar/>   
+          </div>
+
         </div>
       )
     } else {
@@ -86,7 +86,11 @@ export default class MyComponent extends Component {
 
     }
 
-    return <html><div>{fbContent}</div></html>;
+    return (
+      <div>
+      <div>{fbContent}</div>
+      </div>
+    );
 
   }
 }

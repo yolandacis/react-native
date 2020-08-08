@@ -1,12 +1,10 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
-import { API_BASE_URL } from '../config';
-import IncreaseCountButton from './IncreaseCountButton';
-import MovieDelete from './MovieDelete';
-import { confirmAlert} from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import { API_BASE_URL } from '../../config';
+import ReactDOM from 'react-dom';
+import MaterialTable from '../../../node_modules/material-table';
+//import MaterialTable from 'material-table';
 
 export default class App extends React.Component {
     constructor(){
@@ -40,8 +38,6 @@ export default class App extends React.Component {
         this.setState({loaded: true, error: err.message});
     }
     onDelete(id) {
-
-        console.log('clik' + id);
         this.setState({loaded:false, error: null});
         let url = this.baseURL + '/'+ id;
         
@@ -52,11 +48,8 @@ export default class App extends React.Component {
         fetch(req)
         .then(this.showData)
         .then(this.getData)
-        console.log('se elimino');
-
     }
     onIncrease(id) {
-        console.log ('clic en aumentar contador'+ id);
         this.setState({loaded:false, error: null});
         let url = this.baseURL + '/'+ id + '/count';
         
@@ -67,15 +60,14 @@ export default class App extends React.Component {
         fetch(req)
         .then(this.showData)
         .then(this.getData)
-        console.log('se ACTUALIZÓ');
     }
     render() {
         return (
+           
             <ScrollView >
                 { !this.state.loaded && (
                     <Text>LOADING</Text>
                 )}
-                <Text style={styles.txt}> PELICULAS!</Text>
                 <Button title="lISTADO DE PELICULAS"
                     onPress={this.getData} />
                 { this.state.error && (

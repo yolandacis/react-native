@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Message } from 'semantic-ui-react';
 import { withAuth } from '@okta/okta-react';
-
-import { API_BASE_URL } from '../config';
-
+import { API_BASE_URL } from '../../config';
 export default withAuth(class MovieForm extends Component {
 
     constructor (props) {

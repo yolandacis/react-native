@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Linking, TextInput, Button } from 'react-native';
+import Navbar from '../Navbar';
 class WhatsApp extends Component {
 constructor(props){
     super(props);
@@ -28,7 +29,8 @@ constructor(props){
   }
   render() {
     return (
-     <View style={styles.container}>
+
+      <View style={styles.container}>
         <Text style={{textAlign: 'center', fontSize: 20, paddingVertical: 30}}>
           Ejemplo enviar mensaje de whatsapp
         </Text>
